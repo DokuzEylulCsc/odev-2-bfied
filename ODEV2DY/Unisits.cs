@@ -7,10 +7,23 @@ using System.Collections;
 
 namespace ODEV2DY
 {
-    class Universite
+    public class Universite
     {
         public string ad { get; set; }
-        public ArrayList fakulteler;
+        public List<Fakulte> fakulteler;
+        public unimemento extract()
+        {
+            return new unimemento
+            {
+                ad = this.ad,
+                fakulteler = this.fakulteler
+            };
+        }
+        public void insert(unimemento uni)
+        {
+            this.ad = uni.ad;
+            this.fakulteler = uni.fakulteler;
+        }
         public void load()
         {
             foreach(Fakulte fak in Fakulte.get_array())
@@ -19,14 +32,14 @@ namespace ODEV2DY
                 {
                     foreach(Ogretimelemani ogretimelemani in Ogretimelemani.get_array(bol.ad))
                     {
-                        bol.ogretimelemanları = new ArrayList();
-                        bol.ogretimelemanları.Add(ogretimelemani);
+                        bol.ogretimelemanlari = new List<Ogretimelemani>();
+                        bol.ogretimelemanlari.Add(ogretimelemani);
                     }
                     foreach(Ders ders in Ders.get_array(bol.ad))
                     {
                         foreach(Sube sube in Sube.get_array(ders.ad))
                         {
-                            ders.subeler = new ArrayList();
+                            ders.subeler = new List<Sube>();
                             ders.subeler.Add(sube);
                             foreach(Ogretimelemani ogretimelemani in Ogretimelemani.get_array(""))
                             {
@@ -37,22 +50,28 @@ namespace ODEV2DY
                                 }
                             }
                         }
-                       bol.dersler = new ArrayList();
+                       bol.dersler = new List<Ders>();
                        bol.dersler.Add(ders);
                     }
-                    fak.bolumler = new ArrayList();
+                    fak.bolumler = new List<Bolum>();
                     fak.bolumler.Add(bol);
                 }
-                fakulteler = new ArrayList();
+                fakulteler = new List<Fakulte>();
                 fakulteler.Add(fak);
             }
         }
     }
 
-    class Fakulte
+    public class unimemento
     {
         public string ad { get; set; }
-        public ArrayList bolumler;
+        public List<Fakulte> fakulteler;
+    }
+
+    public class Fakulte
+    {
+        public string ad { get; set; }
+        public List<Bolum> bolumler;
         public static ArrayList get_array()
         {
             ArrayList ret = new ArrayList();
@@ -66,12 +85,13 @@ namespace ODEV2DY
             return ret;
         }
     }
-    class Bolum
+    public class Bolum
     {
         public string fakulte { get; set; }
         public string ad { get; set; }
-        public ArrayList dersler;
-        public ArrayList ogretimelemanları;
+        public List<Ders> dersler;
+        public List<Ogretimelemani> ogretimelemanlari;
+        public List<Ogr> ogrenciler;
         public static ArrayList get_array(string fak)
         {
             if (fak == "")
@@ -110,11 +130,11 @@ namespace ODEV2DY
         }
     }
 
-    class Ders
+    public class Ders
     {
     public string bolum { get; set; }
     public string ad { get; set; }
-        public ArrayList subeler;
+        public List<Sube> subeler;
         public static ArrayList get_array(string bolum)
         {
             if(bolum == "")
@@ -154,11 +174,12 @@ namespace ODEV2DY
            
         }
     }
-    class Sube
+    public class Sube
     {
         public string ders { get; set; }
         public string ad { get; set; }
         public Ogretimelemani ogretimelemani { get; set; }
+        public List<Ogr> ogrenciler;
         public static ArrayList get_array(string ders)
         {
             if(ders == "")
@@ -200,7 +221,7 @@ namespace ODEV2DY
 
     }
 
-    class Ogretimelemani
+    public class Ogretimelemani
     {
         public string ad { get; set; }
         public string bolum { get; set; }

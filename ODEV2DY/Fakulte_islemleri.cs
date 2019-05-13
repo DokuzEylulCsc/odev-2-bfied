@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace ODEV2DY
 {
@@ -23,12 +24,15 @@ namespace ODEV2DY
         {
             if (txtfac.Text != "")
             {
-                Dosya.yaz(txtfac.Text,Main.fak_path);
-                txtfac.Text = "";
+                /* Dosya.yaz(txtfac.Text,Main.fak_path);
+                 txtfac.Text = ""; */
+                Fakulte fak = new Fakulte();
+                fak.ad = txtfac.Text;
+                fak.bolumler = new List<Bolum>();
+                Main.universite.fakulteler.Add(fak);
             }
+            txtfac.Text = "";
         }
-
-     
 
         private void Fakulte_islemleri_Load(object sender, EventArgs e)
         {

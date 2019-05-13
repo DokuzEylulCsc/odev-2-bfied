@@ -31,7 +31,7 @@
             this.lbl = new System.Windows.Forms.Label();
             this.btnfakulte = new System.Windows.Forms.Button();
             this.btnbolum = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.memomento = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl
@@ -62,21 +62,22 @@
             this.btnbolum.UseVisualStyleBackColor = true;
             this.btnbolum.Click += new System.EventHandler(this.btnbolum_Click);
             // 
-            // button2
+            // memomento
             // 
-            this.button2.Location = new System.Drawing.Point(551, 117);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(162, 41);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Ders İşlemleri";
-            this.button2.UseVisualStyleBackColor = true;
+            this.memomento.Location = new System.Drawing.Point(551, 117);
+            this.memomento.Name = "memomento";
+            this.memomento.Size = new System.Drawing.Size(162, 41);
+            this.memomento.TabIndex = 3;
+            this.memomento.Text = "GeriAl";
+            this.memomento.UseVisualStyleBackColor = true;
+            this.memomento.Click += new System.EventHandler(this.memomento_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(772, 256);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.memomento);
             this.Controls.Add(this.btnbolum);
             this.Controls.Add(this.btnfakulte);
             this.Controls.Add(this.lbl);
@@ -93,7 +94,7 @@
         private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.Button btnfakulte;
         private System.Windows.Forms.Button btnbolum;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button memomento;
     }
 }
 

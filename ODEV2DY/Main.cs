@@ -8,70 +8,59 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections;
 
 namespace ODEV2DY
 {
     public partial class Main : Form
     {
+        //dosya oluşturma işlemleri
         public static  string fak_path = @".\\fakulte.txt";
         public static string bol_path = @".\\bolum.txt";
         public static string ders_path = @".\\ders.txt";
         public static string sube_path = @".\\sube.txt";
         public static string ogreleman_path = @".\\ogreleman.txt";
-        Universite uni = new Universite();
+        public static Universite universite = new Universite();
+        public unimemento memento = universite.extract();
         public Main()
         {
             InitializeComponent();
         }
 
-        public void universiteolustur(string uniadi)
-        {
-            Dosya.ustuneyaz(uniadi, @".\universite.txt");
-            lbl.Text = uniadi;
-            FileStream fs = File.Create(fak_path);
-            fs.Close();
-            fs = File.Create(bol_path);
-            fs.Close();
-            fs = File.Create(ders_path);
-            fs.Close();
-            fs = File.Create(sube_path);
-            fs.Close();
-            fs = File.Create(ogreleman_path);
-            fs.Close();
-        }
+        
 
         private void Main_Load(object sender, EventArgs e)
         {
-            if (!Dosya.universitevarmi())
-            {
-                Unisec newform = new Unisec();
-                newform.ShowDialog();
-                universiteolustur(Unisec.uniadi);
+            universite.ad = "";
+            while (universite.ad == "")
+            { 
+                Unisec uniform = new Unisec();
+                uniform.ShowDialog();
+                universite.ad = Unisec.uniadi;
             }
-            StreamReader sr = new StreamReader(@".\universite.txt");
-            lbl.Text = sr.ReadLine();
-            sr.Close();
-            while (lbl.Text == "")
-            {
-                Unisec newform = new Unisec();
-                newform.ShowDialog();
-                universiteolustur(Unisec.uniadi);
-            }
-            uni.ad = lbl.Text;
-            uni.load();
+            universite.fakulteler = new List<Fakulte>();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Fakulte_islemleri newform = new Fakulte_islemleri();
             newform.ShowDialog();
-        }
+                  memento = universite.extract();
 
-        private void btnbolum_Click(object sender, EventArgs e)
+    }
+
+    private void btnbolum_Click(object sender, EventArgs e)
         {
             Bolumformu newform = new Bolumformu();
             newform.ShowDialog();
-        }
+              memento = universite.extract();
 
+}
+
+private void memomento_Click(object sender, EventArgs e)
+        {
+            universite.insert(memento);
+        }
     }
 }

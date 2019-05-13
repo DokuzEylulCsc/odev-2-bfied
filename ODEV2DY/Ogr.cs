@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ODEV2DY
 {
-    abstract class Ogr
+    public abstract class Ogr
     {
         public string ad { get; set; }
 
